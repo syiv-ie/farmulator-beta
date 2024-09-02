@@ -1460,7 +1460,7 @@ function calculateBoard(){
                     minProfit = Math.round(yieldBoost*minProfit);
                     maxProfit = Math.round(yieldBoost*maxProfit);
 
-                    fullHarvest += strawberryLoops * ((minProfit + maxProfit)/2) * (plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price);
+                    fullHarvest += strawberryLoops * ((minProfit + maxProfit)/2) * (plotList[groups[l].plots[i][j]].value);
 
                     sickleBoost *= 
                         ((plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price)); 
