@@ -3,7 +3,7 @@
 //top ten "id rather do it in js" codes
 
 let currentWebsiteVersion = "2.1.0";
-let startingFarm = "/2.0.0/-ac2f-cobodof-eobbdof-gobodof-ic0bc0dbf-kc1bodof/-bbfc2jblc2nc2pbrc2tc2vlx-dqdqfc3hqjc2lqnqpc2rqtqvlx-fbbodofohc2jolonoporotovbx-hd1bqdqfbhqjblqnqpbrqtqvd3x-jodofohc1jolonoporotov-lbbqdqfc0hqjc1lqnqpbrqtqvbx-nd1bodofbhc1jblonoporotovd3x-pqdqfc2hqjc1lqnqpbrqtqv-rbbodofohc1jolonoporotovbx-td1bqdqfbhqjblqnqpc0rqtqvc3x-vodofohc1jolonopbrd3t-xbbqdqfbhqjblqnqpc3r////-bobodofoh-dobbdbfoh-fobodofoh-hc0bc0dc0fc0h/"
+let startingFarm = "`/2.1.0/ag38//-jojolon-lojolon/////`"
 
 let chosenFarmSpot = 12;
 let previousPlot = chosenFarmSpot;
@@ -685,11 +685,11 @@ function buildFarm(){
             let sickleProfitLabel = document.createElement("div");
             sickleDisplay.appendChild(sickleProfitLabel);
             sickleProfitLabel.id = "sickleProfitLabel"; 
-            sickleProfitLabel.innerHTML = "Sickle Profit: "; 
+            sickleProfitLabel.innerHTML = "Full Harvest: "; 
             let sickleProfitScore = document.createElement("div");
             sickleDisplay.appendChild(sickleProfitScore);
             sickleProfitScore.id = "sickleProfitScore";  
-            sickleProfitScore.innerHTML = "+0"; 
+            sickleProfitScore.innerHTML = "0"; 
             let sickleSelectorDiv = document.createElement("div");
             sickleDisplay.appendChild(sickleSelectorDiv);
             sickleSelectorDiv.id = "sickleSelectorDiv";  
@@ -1225,6 +1225,7 @@ function calculateBoard(){
     let strangeProfit = 0;
     let sickleHourlyProfit = 0;
     let totalProfit = 0;
+    let fullHarvest = 0
 
 
     let cloverVal = 0;
@@ -1459,6 +1460,8 @@ function calculateBoard(){
                     minProfit = Math.round(yieldBoost*minProfit);
                     maxProfit = Math.round(yieldBoost*maxProfit);
 
+                    fullHarvest += ((minProfit + maxProfit)/2) * (plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price);
+
                     sickleBoost *= 
                         ((plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price)); 
 
@@ -1480,9 +1483,9 @@ function calculateBoard(){
                     maxHourlyProfit += maxProfit;
 
                     if(plotList[Math.max(0,groups[l].plots[i][j])].isConsumable){
-                        consumableProfit += (minProfit + maxProfit)/2
+                        consumableProfit += (minProfit + maxProfit)/2;
                     }else{
-                        baseProfit += (minProfit + maxProfit)/2
+                        baseProfit += (minProfit + maxProfit)/2;
                     }
                 }else{
                     document.getElementById("plot" + String.fromCharCode("A".charCodeAt(0) + l) + i + "," + j).style.filter = "";
@@ -1505,10 +1508,12 @@ function calculateBoard(){
     }
     if(strangeSelected){
         totalProfit += strangeProfit;
+        fullHarvest *= (1 - cloverStrangeEffect) + (5 * cloverStrangeEffect);
         sickleProfit *= (1 - cloverStrangeEffect) + (5 * cloverStrangeEffect);
         sickleHourlyProfit *= (1 - cloverStrangeEffect) + (5 * cloverStrangeEffect);
     }
     if(sickleSelected){
+        fullHarvest += sickleProfit;
         totalProfit += sickleHourlyProfit;
     }
 
@@ -1522,7 +1527,7 @@ function calculateBoard(){
     document.getElementById("totalProfit").innerHTML = (Math.round(100 * totalProfit) / 100);
     //document.getElementById("playerStrangerateScore").innerHTML = Math.round(100000 * cloverStrangeEffect) / 1000 + "%";
     //document.getElementById("playerCloverTimeScore").innerHTML = Math.round(100000 * (1/cloverTimeEffect)) / 1000 + "%";
-    document.getElementById("sickleProfitScore").innerHTML = "+" + (Math.round(100 * sickleProfit) / 100);
+    document.getElementById("sickleProfitScore").innerHTML = (Math.round(100 * fullHarvest) / 100);
 
     document.getElementById("cdnd0").innerHTML = totalPlots;
     document.getElementById("cdnd1").innerHTML = plotCount[1];
