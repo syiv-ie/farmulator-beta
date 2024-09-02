@@ -3,7 +3,7 @@
 //top ten "id rather do it in js" codes
 
 let currentWebsiteVersion = "2.1.0";
-let startingFarm = "`/2.1.0/ag38//-jojolon-lojolon/////`"
+let startingFarm = "`/2.1.0/gg52/-ad2f-cobodof-eobbdof-gobodof-id0bd0dbf-kd1bodof/-bbfd2jbld2nd2pbrd2td2vlx-dqdqfd3hqjd2lqnqpd2rqtqvlx-fbbodofohd2jolonoporotovbx-he1bqdqfbhqjblqnqpbrqtqve3x-jodofohd1jolonoporotov-lbbqdqfd0hqjd1lqnqpbrqtqvbx-ne1bodofbhd1jblonoporotove3x-pqdqfd2hqjd1lqnqpbrqtqv-rbbodofohd1jolonoporotovbx-te1bqdqfbhqjblqnqpd0rqtqvd3x-vodofohd1jolonopbre3t-xbbqdqfbhqjblqnqpd3r/-bd2bd2d-dobod-fobbd-hobod///-bobodofoh-dobbdbfoh-fobodofoh-hd0bd0dd0fd0h/`"
 
 let chosenFarmSpot = 12;
 let previousPlot = chosenFarmSpot;
@@ -1454,13 +1454,13 @@ function calculateBoard(){
                         //document.getElementById("plotB5,5").innerHTML = strawberryBoost +","+ strawberryHourlyRepeat +","+ minutes +","+ ogMinutes;
                     }
                     
-                    //console.log(Math.round(yieldBoost*minProfit) + "," + yieldBoost*minProfit);
+                    let strawberryLoops = Math.floor((plotList[groups[l].plots[i][j]].time + (groups[l].strawberried[i][j] * .5)) / plotList[groups[l].plots[i][j]].time)
 
                     sickleBoost = Math.round(yieldBoost*sickleBoost);
                     minProfit = Math.round(yieldBoost*minProfit);
                     maxProfit = Math.round(yieldBoost*maxProfit);
 
-                    fullHarvest += ((minProfit + maxProfit)/2) * (plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price);
+                    fullHarvest += strawberryLoops * ((minProfit + maxProfit)/2) * (plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price);
 
                     sickleBoost *= 
                         ((plotList[groups[l].plots[i][j]].value - plotList[groups[l].plots[i][j]].price)); 
