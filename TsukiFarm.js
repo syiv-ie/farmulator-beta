@@ -5,6 +5,10 @@
 let currentWebsiteVersion = "2.1.0";
 let startingFarm = "`/2.1.0/gg52/-ad2f-cobodof-eobbdof-gobodof-id0bd0dbf-kd1bodof/-bbfd2jbld2nd2pbrd2td2vlx-dqdqfd3hqjd2lqnqpd2rqtqvlx-fbbodofohd2jolonoporotovbx-he1bqdqfbhqjblqnqpbrqtqve3x-jodofohd1jolonoporotov-lbbqdqfd0hqjd1lqnqpbrqtqvbx-ne1bodofbhd1jblonoporotove3x-pqdqfd2hqjd1lqnqpbrqtqv-rbbodofohd1jolonoporotovbx-te1bqdqfbhqjblqnqpd0rqtqvd3x-vodofohd1jolonopbre3t-xbbqdqfbhqjblqnqpd3r/-bd2bd2d-dobod-fobbd-hobod///-bobodofoh-dobbdbfoh-fobodofoh-hd0bd0dd0fd0h/`"
 
+let tutorialFarm = "`/2.1.0/ag10//-bqlmnbpd3r-dqlfn-hll-jlj/////`"
+let pausedFarm = ""
+
+
 let chosenFarmSpot = 12;
 let previousPlot = chosenFarmSpot;
 let chosenFarmSpotDirection = 0;
@@ -18,6 +22,8 @@ let revealWateredSelected = false;
 let revealFertSelected = false;
 let revealUVSelected = false;
 
+let helpShown = false;
+
 let toggleCount = 4;
 let consumableSelected = true;
 let fertCostSelected = true;
@@ -29,12 +35,6 @@ var toggleList = [
     strangeSelected,
     sickleSelected
 ]
-
-let gccKey = 1;
-let gccToggle = false;
-let englishSelected = true;
-let isRight = true;
-let isHidden = true;
 
 let baseStrangeRate = .0015;
 let baseOrbPrice = 10000;
@@ -260,11 +260,7 @@ function numberWithCommas(x) {//thanks stackoverflow i love you
 buildFarm();
 function buildFarm(){
     console.log(strawberry.isClover)
-    // document.getElementById("farmPlotSelect").selectedIndex = 1;
-    // chosenFarmSpot = document.getElementById("farmPlotSelect").value;
     
-    
-    document.getElementById("englishOrSpanish").innerHTML = "<img id=\"englishOrSpanishImg\" src=\"images/farmPlots/English.png\">"
     makeGroups();
     let charCode = "A".charCodeAt(0);
     let farm = document.getElementById("Farm");
@@ -935,6 +931,9 @@ function buildFarm(){
             sickleProfit.className = "profitText"
             profitDisplay.appendChild(sickleProfit);
             sickleProfit.innerHTML = "0"
+        let profitIconDiv = document.createElement("div");
+        profitIconDiv.id = "profitIconDiv";
+        profitDisplayDiv.appendChild(profitIconDiv);
 
         let profitToggleDiv = document.createElement("div");
         profitToggleDiv.id = "profitToggleDiv";
@@ -1002,58 +1001,518 @@ function buildFarm(){
             totalDisplay.appendChild(totalEqual);
             totalEqual.innerHTML = "="
 
-    /////////////////////////////calculation toggle stuffs//////////////////////////////////// 
-    let toggleDisplayDiv = document.createElement("div");
-    toggleDisplayDiv.id = "toggleDisplayDiv";
-    uiDiv.appendChild(toggleDisplayDiv);
-    toggleDisplayDiv.style.display = "none"
-        let toggleDisplay = document.createElement("div");
-        toggleDisplay.id = "toggleDisplay";
-        toggleDisplayDiv.appendChild(toggleDisplay);
+    //////////////////////////////help stuffs///////////////////////////////////
+    let helpDiv = document.createElement("div");
+    helpDiv.id = "helpDiv";
+    uiDiv.appendChild(helpDiv);
+        let help = document.createElement("div");
+        help.id = "help";
+        helpDiv.appendChild(help);
+            let helpImg = document.createElement("img");
+            helpImg.id = "helpImg";
+            help.appendChild(helpImg);
+            helpImg.src = "images/farmPlots/helpIcon.png";
+            
+            let helpOverlayDiv = document.createElement("div");
+            helpOverlayDiv.id = "helpOverlayDiv";
+            helpDiv.appendChild(helpOverlayDiv);
+            helpOverlayDiv.style.display = "none"
+                let helpBlurDiv = document.createElement("div");
+                helpBlurDiv.id = "helpBlurDiv";
+                helpOverlayDiv.appendChild(helpBlurDiv);
+                    let helpBlur = document.createElement("div");
+                    helpBlur.id = "helpBlur";
+                    helpBlurDiv.appendChild(helpBlur);
 
-            let strangeToggle = document.createElement("div");
-            strangeToggle.id = "strangeToggle";
-            toggleDisplay.appendChild(strangeToggle);
-                let strangeToggleImg = document.createElement("img");
-                strangeToggleImg.id = "strangeToggleImg";
-                strangeToggleImg.src = "images/farmPlots/Gold4LeafClover.png";
-                strangeToggle.appendChild(strangeToggleImg);
-                strangeToggleImg.onclick = function(){
-                    strangeToggleX.style.display = ""
-                    strangeSelected = false;
-                    calculateBoard();
-                }
-                let strangeToggleX = document.createElement("img");
-                strangeToggleX.id = "strangeToggleX";
-                strangeToggleX.style.display = "";
-                strangeToggleX.src = "images/farmPlots/orbAdd.png";
-                strangeToggle.appendChild(strangeToggleX);
-                strangeToggleX.onclick = function(){
-                    strangeToggleX.style.display = "none"
-                    strangeSelected = true;
-                    calculateBoard();
-                }
+                let helpCanvasDiv = document.createElement("div");
+                helpCanvasDiv.id = "helpCanvasDiv";
+                helpOverlayDiv.appendChild(helpCanvasDiv);
+                    let helpCanvas = document.createElement("canvas");
+                    helpCanvas.id = "helpCanvas";
+                    helpCanvas.width = 1000
+                    helpCanvas.height = 1000
+                    helpCanvasDiv.appendChild(helpCanvas);
+                        const cropLine1 = helpCanvas.getContext("2d");
+                        cropLine1.className = "helpLine"
+                        cropLine1.beginPath();
+                        cropLine1.moveTo(490, 60);
+                        cropLine1.lineTo(490, 215);
+                        cropLine1.strokeStyle = '#ffcccc'
+                        cropLine1.lineWidth = 5
+                        cropLine1.stroke();
+                        const cropLine2 = helpCanvas.getContext("2d");
+                        cropLine2.className = "helpLine"
+                        cropLine2.beginPath();
+                        cropLine2.moveTo(490, 60);
+                        cropLine2.lineTo(350, 60);
+                        cropLine2.strokeStyle = '#ffcccc'
+                        cropLine2.lineWidth = 5
+                        cropLine2.stroke();
+                            let cropHelp1 = document.createElement("div");
+                            cropHelp1.className = "helpTextRight";
+                            cropHelp1.id = "breedCountHelp";
+                            cropHelp1.innerHTML = "Plot Effects"
+                            cropHelp1.style.left = "-49vw"
+                            cropHelp1.style.top = "-7.5vw"
+                            cropHelp1.style.width = "22vw"
+                            helpOverlayDiv.appendChild(cropHelp1);
+                            let cropHelp2 = document.createElement("div");
+                            cropHelp2.className = "helpSubTextRight";
+                            cropHelp2.id = "breedCountHelp";
+                            cropHelp2.innerHTML = "Effects will show up on a plot depending on their surroundings"
+                            cropHelp2.style.left = "-49vw"
+                            cropHelp2.style.top = "-4vw"
+                            cropHelp2.style.width = "22vw"
+                            helpOverlayDiv.appendChild(cropHelp2);
+
+                        const breedSpotLine1 = helpCanvas.getContext("2d");
+                        breedSpotLine1.className = "helpLine"
+                        breedSpotLine1.beginPath();
+                        breedSpotLine1.moveTo(100, 170);
+                        breedSpotLine1.lineTo(100, 240);
+                        breedSpotLine1.strokeStyle = '#ffcccc'
+                        breedSpotLine1.lineWidth = 5
+                        breedSpotLine1.stroke();
+                        const breedSpotLine2 = helpCanvas.getContext("2d");
+                        breedSpotLine2.className = "helpLine"
+                        breedSpotLine2.beginPath();
+                        breedSpotLine2.moveTo(100, 240);
+                        breedSpotLine2.lineTo(290, 240);
+                        breedSpotLine2.strokeStyle = '#ffcccc'
+                        breedSpotLine2.lineWidth = 5
+                        breedSpotLine2.stroke();
+                            let breedHelp1 = document.createElement("div");
+                            breedHelp1.className = "helpText";
+                            breedHelp1.id = "breedCountHelp";
+                            breedHelp1.innerHTML = "Breeding Display"
+                            breedHelp1.style.left = "-62vw"
+                            breedHelp1.style.top = "10vw"
+                            breedHelp1.style.width = "1000vw"
+                            helpOverlayDiv.appendChild(breedHelp1);
+                            let breedHelp2 = document.createElement("div");
+                            breedHelp2.className = "helpSubText";
+                            breedHelp2.id = "breedCountHelp";
+                            breedHelp2.innerHTML = "This tallies how many [breedable items] you have, their total [breeding spots] and [breeding chances]"
+                            breedHelp2.style.left = "-62vw"
+                            breedHelp2.style.top = "13.3vw"
+                            breedHelp2.style.width = "28vw"
+                            helpOverlayDiv.appendChild(breedHelp2);
+                        const breedSpotLine3 = helpCanvas.getContext("2d");
+                        breedSpotLine3.className = "helpLine"
+                        breedSpotLine3.beginPath();
+                        breedSpotLine3.moveTo(395, 310);
+                        breedSpotLine3.lineTo(405, 350);
+                        breedSpotLine3.strokeStyle = '#ffffff'
+                        breedSpotLine3.lineWidth = 5
+                        breedSpotLine3.stroke();
+                        const breedSpotLine4 = helpCanvas.getContext("2d");
+                        breedSpotLine4.className = "helpLine"
+                        breedSpotLine4.beginPath();
+                        breedSpotLine4.moveTo(355, 335);
+                        breedSpotLine4.lineTo(418, 380);
+                        breedSpotLine4.strokeStyle = '#ffffff'
+                        breedSpotLine4.lineWidth = 5
+                        breedSpotLine4.stroke();
+
+                        const orbLine = helpCanvas.getContext("2d");
+                        orbLine.className = "helpLine"
+                        orbLine.beginPath();
+                        orbLine.moveTo(50, 390);
+                        orbLine.lineTo(245, 390);
+                        orbLine.strokeStyle = '#ffcccc'
+                        orbLine.lineWidth = 5
+                        orbLine.stroke();
+                            let orbHelp1 = document.createElement("div");
+                            orbHelp1.className = "helpText";
+                            orbHelp1.id = "breedCountHelp";
+                            orbHelp1.innerHTML = "Orb Display"
+                            orbHelp1.style.left = "-62vw"
+                            orbHelp1.style.top = "24.4vw"
+                            orbHelp1.style.width = "1000vw"
+                            helpOverlayDiv.appendChild(orbHelp1);
+                            let orbHelp2 = document.createElement("div");
+                            orbHelp2.className = "helpSubText";
+                            orbHelp2.id = "breedCountHelp";
+                            orbHelp2.innerHTML = "Updating this helps show accurate plot limits and tallies orb costs"
+                            orbHelp2.style.left = "-62vw"
+                            orbHelp2.style.top = "27.8vw"
+                            orbHelp2.style.width = "24.5vw"
+                            helpOverlayDiv.appendChild(orbHelp2);
+                            let orbHelp3 = document.createElement("div");
+                            orbHelp3.className = "helpSubText";
+                            orbHelp3.id = "breedCountHelp";
+                            orbHelp3.innerHTML = "Tap the [-] and [+] buttons!"
+                            orbHelp3.style.left = "-62vw"
+                            orbHelp3.style.top = "35vw"
+                            orbHelp3.style.width = "2400.5vw"
+                            helpOverlayDiv.appendChild(orbHelp3);
+
+                        const revealBarLine1 = helpCanvas.getContext("2d");
+                        revealBarLine1.className = "helpLine"
+                        revealBarLine1.beginPath();
+                        revealBarLine1.moveTo(50, 754);
+                        revealBarLine1.lineTo(50, 540);
+                        revealBarLine1.strokeStyle = '#ffcccc'
+                        revealBarLine1.lineWidth = 5
+                        revealBarLine1.stroke();
+                        const revealBarLine2 = helpCanvas.getContext("2d");
+                        revealBarLine2.className = "helpLine"
+                        revealBarLine2.beginPath();
+                        revealBarLine2.moveTo(50, 540);
+                        revealBarLine2.lineTo(235, 540);
+                        revealBarLine2.strokeStyle = '#ffcccc'
+                        revealBarLine2.lineWidth = 5
+                        revealBarLine2.stroke();
+                            let revealBarHelp1 = document.createElement("div");
+                            revealBarHelp1.className = "helpText";
+                            revealBarHelp1.id = "breedCountHelp";
+                            revealBarHelp1.innerHTML = "Reveal Bar"
+                            revealBarHelp1.style.left = "-62vw"
+                            revealBarHelp1.style.top = "39.0vw"
+                            revealBarHelp1.style.width = "24.5vw"
+                            helpOverlayDiv.appendChild(revealBarHelp1);
+                            let revealBarHelp2 = document.createElement("div");
+                            revealBarHelp2.className = "helpSubText";
+                            revealBarHelp2.id = "breedCountHelp";
+                            revealBarHelp2.innerHTML = "Tap an effect to show plots that are missing said effect"
+                            revealBarHelp2.style.left = "-62vw"
+                            revealBarHelp2.style.top = "42.2vw"
+                            revealBarHelp2.style.width = "29.5vw"
+                            helpOverlayDiv.appendChild(revealBarHelp2);
+
+                        const saveLoadLine1 = helpCanvas.getContext("2d");
+                        saveLoadLine1.className = "helpLine"
+                        saveLoadLine1.beginPath();
+                        saveLoadLine1.moveTo(70, 830);
+                        saveLoadLine1.lineTo(70, 643);
+                        saveLoadLine1.strokeStyle = '#ffcccc'
+                        saveLoadLine1.lineWidth = 5
+                        saveLoadLine1.stroke();
+                        const saveLoadLine2 = helpCanvas.getContext("2d");
+                        saveLoadLine2.className = "helpLine"
+                        saveLoadLine2.beginPath();
+                        saveLoadLine2.moveTo(70, 643);
+                        saveLoadLine2.lineTo(280, 643);
+                        saveLoadLine2.strokeStyle = '#ffcccc'
+                        saveLoadLine2.lineWidth = 5
+                        saveLoadLine2.stroke();
+                            let saveLoadHelp1 = document.createElement("div");
+                            saveLoadHelp1.className = "helpText";
+                            saveLoadHelp1.id = "breedCountHelp";
+                            saveLoadHelp1.innerHTML = "Save/Load Box"
+                            saveLoadHelp1.style.left = "-62vw"
+                            saveLoadHelp1.style.top = "48.9vw"
+                            saveLoadHelp1.style.width = "24.5vw"
+                            helpOverlayDiv.appendChild(saveLoadHelp1);
+                            let saveLoadHelp2 = document.createElement("div");
+                            saveLoadHelp2.className = "helpSubText";
+                            saveLoadHelp2.id = "breedCountHelp";
+                            saveLoadHelp2.innerHTML = "Paste codes into the [white box] and load them with the [arrow]"
+                            saveLoadHelp2.style.left = "-62vw"
+                            saveLoadHelp2.style.top = "52vw"
+                            saveLoadHelp2.style.width = "31.5vw"
+                            helpOverlayDiv.appendChild(saveLoadHelp2);
+                            let saveLoadHelp3 = document.createElement("div");
+                            saveLoadHelp3.className = "helpSubText";
+                            saveLoadHelp3.id = "breedCountHelp";
+                            saveLoadHelp3.innerHTML = "Tap the [dark blue box] to save a code to your clipboard"
+                            saveLoadHelp3.style.left = "-62vw"
+                            saveLoadHelp3.style.top = "56.8vw"
+                            saveLoadHelp3.style.width = "31.5vw"
+                            helpOverlayDiv.appendChild(saveLoadHelp3);
+                        
+                        const counterBoxLine1 = helpCanvas.getContext("2d");
+                        counterBoxLine1.className = "helpLine"
+                        counterBoxLine1.beginPath();
+                        counterBoxLine1.moveTo(472, 878);
+                        counterBoxLine1.lineTo(400, 878);
+                        counterBoxLine1.strokeStyle = '#ffcccc'
+                        counterBoxLine1.lineWidth = 5
+                        counterBoxLine1.stroke();
+                        const counterBoxLine2 = helpCanvas.getContext("2d");
+                        counterBoxLine2.className = "helpLine"
+                        counterBoxLine2.beginPath();
+                        counterBoxLine2.moveTo(400, 878);
+                        counterBoxLine2.lineTo(400, 790);
+                        counterBoxLine2.strokeStyle = '#ffcccc'
+                        counterBoxLine2.lineWidth = 5
+                        counterBoxLine2.stroke();
+                        const counterBoxLine3 = helpCanvas.getContext("2d");
+                        counterBoxLine3.className = "helpLine"
+                        counterBoxLine3.beginPath();
+                        counterBoxLine3.moveTo(400, 790);
+                        counterBoxLine3.lineTo(110, 790);
+                        counterBoxLine3.strokeStyle = '#ffcccc'
+                        counterBoxLine3.lineWidth = 5
+                        counterBoxLine3.stroke();
+                            let counterBoxHelp1 = document.createElement("div");
+                            counterBoxHelp1.className = "helpText";
+                            counterBoxHelp1.id = "breedCountHelp";
+                            counterBoxHelp1.innerHTML = "Counter Display/Plot Selector"
+                            counterBoxHelp1.style.left = "-62vw"
+                            counterBoxHelp1.style.top = "62.8vw"
+                            counterBoxHelp1.style.width = "30.5vw"
+                            helpOverlayDiv.appendChild(counterBoxHelp1);
+                            let counterBoxHelp2 = document.createElement("div");
+                            counterBoxHelp2.className = "helpSubText";
+                            counterBoxHelp2.id = "breedCountHelp";
+                            counterBoxHelp2.innerHTML = "Tap an item in the display to select it, then tap in the grid to place it."
+                            counterBoxHelp2.style.left = "-62vw"
+                            counterBoxHelp2.style.top = "66vw"
+                            counterBoxHelp2.style.width = "27vw"
+                            helpOverlayDiv.appendChild(counterBoxHelp2);
+                            let counterBoxHelp3 = document.createElement("div");
+                            counterBoxHelp3.className = "helpSubText";
+                            counterBoxHelp3.id = "breedCountHelp";
+                            counterBoxHelp3.innerHTML = "The first tab allows you to rotate an item before placing, and selecting the second tab allows you to erase plots"
+                            counterBoxHelp3.style.left = "-62vw"
+                            counterBoxHelp3.style.top = "73.5vw"
+                            counterBoxHelp3.style.width = "32vw"
+                            helpOverlayDiv.appendChild(counterBoxHelp3);
+                            let counterBoxHelp4 = document.createElement("div");
+                            counterBoxHelp4.className = "helpSubText";
+                            counterBoxHelp4.id = "breedCountHelp";
+                            counterBoxHelp4.innerHTML = "The white numbers are total plots, and the green/yellow/red ones show what your limits are"
+                            counterBoxHelp4.style.left = "-31vw"
+                            counterBoxHelp4.style.top = "75vw"
+                            counterBoxHelp4.style.width = "26vw"
+                            helpOverlayDiv.appendChild(counterBoxHelp4);
+
+                        const helpButtonLine1 = helpCanvas.getContext("2d");
+                        helpButtonLine1.className = "helpLine"
+                        helpButtonLine1.beginPath();
+                        helpButtonLine1.moveTo(800, 100);
+                        helpButtonLine1.lineTo(800, 150);
+                        helpButtonLine1.strokeStyle = '#ffcccc'
+                        helpButtonLine1.lineWidth = 5
+                        helpButtonLine1.stroke();
+                        const helpButtonLine2 = helpCanvas.getContext("2d");
+                        helpButtonLine2.className = "helpLine"
+                        helpButtonLine2.beginPath();
+                        helpButtonLine2.moveTo(800, 150);
+                        helpButtonLine2.lineTo(650, 150);
+                        helpButtonLine2.strokeStyle = '#ffcccc'
+                        helpButtonLine2.lineWidth = 5
+                        helpButtonLine2.stroke();
+                            let helpButtonHelp1 = document.createElement("div");
+                            helpButtonHelp1.className = "helpTextRight";
+                            helpButtonHelp1.id = "breedCountHelp";
+                            helpButtonHelp1.innerHTML = "Help! Button"
+                            helpButtonHelp1.style.left = "-20vw"
+                            helpButtonHelp1.style.top = "1vw"
+                            helpButtonHelp1.style.width = "22.5vw"
+                            helpOverlayDiv.appendChild(helpButtonHelp1);
+                            let helpButtonHelp2 = document.createElement("div");
+                            helpButtonHelp2.className = "helpSubTextRight";
+                            helpButtonHelp2.id = "breedCountHelp";
+                            helpButtonHelp2.innerHTML = "\"... ... ...\" "
+                            helpButtonHelp2.style.left = "-20vw"
+                            helpButtonHelp2.style.top = "4.5vw"
+                            helpButtonHelp2.style.width = "22.5vw"
+                            helpOverlayDiv.appendChild(helpButtonHelp2);
+
+                        const eraseFarmLine1 = helpCanvas.getContext("2d");
+                        eraseFarmLine1.className = "helpLine"
+                        eraseFarmLine1.beginPath();
+                        eraseFarmLine1.moveTo(902, 98);
+                        eraseFarmLine1.lineTo(902, 230);
+                        eraseFarmLine1.strokeStyle = '#ffcccc'
+                        eraseFarmLine1.lineWidth = 5
+                        eraseFarmLine1.stroke();
+                        const eraseFarmLine2 = helpCanvas.getContext("2d");
+                        eraseFarmLine2.className = "helpLine"
+                        eraseFarmLine2.beginPath();
+                        eraseFarmLine2.moveTo(902, 230);
+                        eraseFarmLine2.lineTo(700, 230);
+                        eraseFarmLine2.strokeStyle = '#ffcccc'
+                        eraseFarmLine2.lineWidth = 5
+                        eraseFarmLine2.stroke();
+                            let eraseFarmHelp1 = document.createElement("div");
+                            eraseFarmHelp1.className = "helpTextRight";
+                            eraseFarmHelp1.id = "breedCountHelp";
+                            eraseFarmHelp1.innerHTML = "Erase Farm Button"
+                            eraseFarmHelp1.style.left = "-20vw"
+                            eraseFarmHelp1.style.top = "9vw"
+                            eraseFarmHelp1.style.width = "32.5vw"
+                            helpOverlayDiv.appendChild(eraseFarmHelp1);
+                            let eraseFarmHelp2 = document.createElement("div");
+                            eraseFarmHelp2.className = "helpSubTextRight";
+                            eraseFarmHelp2.id = "breedCountHelp";
+                            eraseFarmHelp2.innerHTML = "Tap this to clear the Farm"
+                            eraseFarmHelp2.style.left = "-20vw"
+                            eraseFarmHelp2.style.top = "12.5vw"
+                            eraseFarmHelp2.style.width = "32.5vw"
+                            helpOverlayDiv.appendChild(eraseFarmHelp2);
+
+                        const hourlyProfitLine1 = helpCanvas.getContext("2d");
+                        hourlyProfitLine1.className = "helpLine"
+                        hourlyProfitLine1.beginPath();
+                        hourlyProfitLine1.moveTo(902, 430);
+                        hourlyProfitLine1.lineTo(902, 320);
+                        hourlyProfitLine1.strokeStyle = '#ffcccc'
+                        hourlyProfitLine1.lineWidth = 5
+                        hourlyProfitLine1.stroke();
+                        const hourlyProfitLine2 = helpCanvas.getContext("2d");
+                        hourlyProfitLine2.className = "helpLine"
+                        hourlyProfitLine2.beginPath();
+                        hourlyProfitLine2.moveTo(902, 320);
+                        hourlyProfitLine2.lineTo(700, 320);
+                        hourlyProfitLine2.strokeStyle = '#ffcccc'
+                        hourlyProfitLine2.lineWidth = 5
+                        hourlyProfitLine2.stroke();
+                            let hourlyProfitHelp1 = document.createElement("div");
+                            hourlyProfitHelp1.className = "helpTextRight";
+                            hourlyProfitHelp1.id = "breedCountHelp";
+                            hourlyProfitHelp1.innerHTML = "Profit Display"
+                            hourlyProfitHelp1.style.left = "-20vw"
+                            hourlyProfitHelp1.style.top = "17.8vw"
+                            hourlyProfitHelp1.style.width = "32.5vw"
+                            helpOverlayDiv.appendChild(hourlyProfitHelp1);
+                            let hourlyProfitHelp2 = document.createElement("div");
+                            hourlyProfitHelp2.className = "helpSubTextRight";
+                            hourlyProfitHelp2.id = "breedCountHelp";
+                            hourlyProfitHelp2.innerHTML = "This calculates your profit on the farm"
+                            hourlyProfitHelp2.style.left = "-25vw"
+                            hourlyProfitHelp2.style.top = "21vw"
+                            hourlyProfitHelp2.style.width = "37.5vw"
+                            helpOverlayDiv.appendChild(hourlyProfitHelp2);
+                            let hourlyProfitHelp3 = document.createElement("div");
+                            hourlyProfitHelp3.className = "helpTextRight";
+                            hourlyProfitHelp3.id = "breedCountHelp";
+                            hourlyProfitHelp3.innerHTML = "[Orange] is for non consumables  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp[Red] is for consumables &nbsp&nbsp&nbsp&nbsp&nbsp[Brown] subtracts the cost of fert &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp[Purple] adds in strange crops &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp[White] is hourly sickle bost"
+                            hourlyProfitHelp3.style.left = "-25vw"
+                            hourlyProfitHelp3.style.top = "23.7vw"
+                            hourlyProfitHelp3.style.width = "37.5vw"
+                            helpOverlayDiv.appendChild(hourlyProfitHelp3);
+                            let hourlyProfitHelp4 = document.createElement("div");
+                            hourlyProfitHelp4.className = "helpSubTextRight";
+                            hourlyProfitHelp4.id = "breedCountHelp";
+                            hourlyProfitHelp4.innerHTML = "Tap the checkboxes to remove/add a value to the calculation"
+                            hourlyProfitHelp4.style.left = "-25vw"
+                            hourlyProfitHelp4.style.top = "36.2vw"
+                            hourlyProfitHelp4.style.width = "37.5vw"
+                            helpOverlayDiv.appendChild(hourlyProfitHelp4);
+                            let hourlyProfitHelp5 = document.createElement("div");
+                            hourlyProfitHelp5.className = "helpSubTextRight";
+                            hourlyProfitHelp5.id = "breedCountHelp";
+                            hourlyProfitHelp5.innerHTML = "The first Sum is for [HOURLY] and the second is for a [FULL HARVEST]"
+                            hourlyProfitHelp5.style.left = "-25vw"
+                            hourlyProfitHelp5.style.top = "41.1vw"
+                            hourlyProfitHelp5.style.width = "37.5vw"
+                            helpOverlayDiv.appendChild(hourlyProfitHelp5);
+
+                        const hoeLine1 = helpCanvas.getContext("2d");
+                        hoeLine1.className = "helpLine"
+                        hoeLine1.beginPath();
+                        hoeLine1.moveTo(620, 755);
+                        hoeLine1.lineTo(620, 640);
+                        hoeLine1.strokeStyle = '#ffcccc'
+                        hoeLine1.lineWidth = 5
+                        hoeLine1.stroke();
+                        const hoeLine2 = helpCanvas.getContext("2d");
+                        hoeLine2.className = "helpLine"
+                        hoeLine2.beginPath();
+                        hoeLine2.moveTo(620, 640);
+                        hoeLine2.lineTo(894, 640);
+                        hoeLine2.strokeStyle = '#ffcccc'
+                        hoeLine2.lineWidth = 5
+                        hoeLine2.stroke();
+                            let hoeHelp1 = document.createElement("div");
+                            hoeHelp1.className = "helpTextRight";
+                            hoeHelp1.id = "breedCountHelp";
+                            hoeHelp1.innerHTML = "Hoe Selector"
+                            hoeHelp1.style.left = "-20vw"
+                            hoeHelp1.style.top = "48.3vw"
+                            hoeHelp1.style.width = "32.5vw"
+                            helpOverlayDiv.appendChild(hoeHelp1);
+                            let hoeHelp2 = document.createElement("div");
+                            hoeHelp2.className = "helpSubTextRight";
+                            hoeHelp2.id = "breedCountHelp";
+                            hoeHelp2.innerHTML = "Updating this helps show accurate plot limits"
+                            hoeHelp2.style.left = "-12vw"
+                            hoeHelp2.style.top = "52vw"
+                            hoeHelp2.style.width = "24.5vw"
+                            helpOverlayDiv.appendChild(hoeHelp2);
+
+                        const sickleLine1 = helpCanvas.getContext("2d");
+                        sickleLine1.className = "helpLine"
+                        sickleLine1.beginPath();
+                        sickleLine1.moveTo(715, 735);
+                        sickleLine1.lineTo(894, 735);
+                        sickleLine1.strokeStyle = '#ffcccc'
+                        sickleLine1.lineWidth = 5
+                        sickleLine1.stroke();
+                            let sickleHelp1 = document.createElement("div");
+                            sickleHelp1.className = "helpTextRight";
+                            sickleHelp1.id = "breedCountHelp";
+                            sickleHelp1.innerHTML = "Sickle Selector"
+                            sickleHelp1.style.left = "-20vw"
+                            sickleHelp1.style.top = "57.9vw"
+                            sickleHelp1.style.width = "32.5vw"
+                            helpOverlayDiv.appendChild(sickleHelp1);
+                            let sickleHelp2 = document.createElement("div");
+                            sickleHelp2.className = "helpSubTextRight";
+                            sickleHelp2.id = "breedCountHelp";
+                            sickleHelp2.innerHTML = "Updating this helps show accurate sickle profits"
+                            sickleHelp2.style.left = "-12vw"
+                            sickleHelp2.style.top = "61vw"
+                            sickleHelp2.style.width = "24.5vw"
+                            helpOverlayDiv.appendChild(sickleHelp2);
+
+                        const undoRedoLine1 = helpCanvas.getContext("2d");
+                        undoRedoLine1.className = "helpLine"
+                        undoRedoLine1.beginPath();
+                        undoRedoLine1.moveTo(492, 799);
+                        undoRedoLine1.lineTo(492, 831);
+                        undoRedoLine1.strokeStyle = '#ffcccc'
+                        undoRedoLine1.lineWidth = 5
+                        undoRedoLine1.stroke();
+                        const undoRedoLine2 = helpCanvas.getContext("2d");
+                        undoRedoLine2.className = "helpLine"
+                        undoRedoLine2.beginPath();
+                        undoRedoLine2.moveTo(492, 831);
+                        undoRedoLine2.lineTo(894, 831);
+                        undoRedoLine2.strokeStyle = '#ffcccc'
+                        undoRedoLine2.lineWidth = 5
+                        undoRedoLine2.stroke();
+                            let undoRedoHelp1 = document.createElement("div");
+                            undoRedoHelp1.className = "helpTextRight";
+                            undoRedoHelp1.id = "breedCountHelp";
+                            undoRedoHelp1.innerHTML = "Undo/Redo Buttons"
+                            undoRedoHelp1.style.left = "-20vw"
+                            undoRedoHelp1.style.top = "67vw"
+                            undoRedoHelp1.style.width = "32.5vw"
+                            helpOverlayDiv.appendChild(undoRedoHelp1);
+                            let undoRedoHelp2 = document.createElement("div");
+                            undoRedoHelp2.className = "helpSubTextRight";
+                            undoRedoHelp2.id = "breedCountHelp";
+                            undoRedoHelp2.innerHTML = "Made a mistake? Tap these to undo or redo a change"
+                            undoRedoHelp2.style.left = "-7vw"
+                            undoRedoHelp2.style.top = "70vw"
+                            undoRedoHelp2.style.width = "19.5vw"
+                            helpOverlayDiv.appendChild(undoRedoHelp2);
+
+
+        helpDiv.onclick = function(){
+            if(helpShown){
+                document.getElementById("IMADETHIS").innerHTML = "MADE BY SYLVIE <br>@syiv on Discord"
+                readFarmstructure(pausedFarm);
+                helpOverlayDiv.style.display = "none"
+                helpShown = false;
+                calculateBoard();
+            }else{
+                document.getElementById("IMADETHIS").innerHTML = "MADE BY SYLVIE - Creator<br>How to find me! - @syiv on Discord"
+                pausedFarm = printFarmstructure()
+                readFarmstructure(tutorialFarm);
+                helpOverlayDiv.style.display = ""
+                helpShown = true;
+                calculateBoard();
+            }
+        }
 
     /////////////////////////////////////////////////////////////////
     
-    document.getElementById("englishOrSpanish").onclick = function(){
-        if(englishSelected){
-            document.getElementById("englishOrSpanish").innerHTML = "<img id=\"englishOrSpanishImg\" src=\"images/farmPlots/Espanol.png\">"
-            document.getElementById("instructions").innerHTML = 
-                "Instrucciones:\<br\>" +
-                "--N/A :(";
-            englishSelected = false;
-        }else{
-            document.getElementById("englishOrSpanish").innerHTML = "<img id=\"englishOrSpanishImg\" src=\"images/farmPlots/English.png\">"
-            document.getElementById("instructions").innerHTML = 
-                "Instructions:\<br\>" +
-                "--N/A :(";
-            englishSelected = true;
-        }
-        calculateBoard();
-    }
-    
-    readFarmstructure(startingFarm);
+    readFarmstructure("");
     calculateBoard();
 }
 

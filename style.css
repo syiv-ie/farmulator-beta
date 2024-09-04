@@ -98,155 +98,41 @@ a:hover{
     background: transparent;
     margin-top: 1vh;
 }
-#plotSelector{
-    overflow-y: scroll; 
-    overflow-x: hidden; 
-    position: fixed;
-    border-style: outset; 
-    border-width: .3vh; 
-    border-radius: 2vh; 
-    padding: .6vh;
-    width: 8vh;
-    height: 60.5vh;
-    border-color: rgb(124, 63, 149); 
-    background-color: rgb(145, 101, 178);
-    color: rgb(255, 255, 255);
-    text-decoration: none;
 
-    top: 17.5vh;
-    font-size: 0vh;
-    white-space: 0vh;
-}
-.plotSelectorImg{
-    white-space: 0vh;
-    padding: .2vh;
-    width: 6.3vh
-}
-#toolBarHider{
-    position: fixed;
-    border-style: outset; 
-    border-width: .3vh; 
-    border-radius: 2vh; 
-    padding: 0vh;
-    width: 6.07vh;
-    height: 3vh;
-    border-color: rgb(107, 9, 146); 
-    background-color: rgb(86, 5, 149);
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-
-    top: 6.3vh;
-    font-size: 2.5vh;
-    text-align: center;
-
-    white-space: 0vh;
-}
-.toolBarHiderImg{
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    white-space: 0vh;
-    padding: .45vh;
-    width: 5vh
-}
-#toolBarFlipper{
-    position: fixed;
-    border-style: outset; 
-    border-width: .3vh; 
-    border-radius: 2vh; 
-    padding: 0vh;
-    width: 6.07vh;
-    height: 3vh;
-    border-color: rgb(107, 9, 146); 
-    background-color: rgb(86, 5, 149);
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-
-    top: 80vh;
-    font-size: 2.5vh;
-    text-align: center;
-
-    white-space: 0vh;
-}
-.toolBarFlipperImg{
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    white-space: 0vh;
-    padding: .45vh;
-    width: 5vh
-}
 
 #farmPlotBox{
-    background-color: rgb(11, 11, 11);
-    border-style: outset; 
+    background: radial-gradient( #41587b,#1f1f1f,#1f1f1f);
+    border-style: solid; 
     border-width: .1vh; 
     border-color: black; 
     border-radius: 1vh;
     color: white;
     text-decoration: none;
     padding: 1vw;
-    width: 95vw;
-    height: 27.5vw;
+    width: 94.2vw;
+    height: 27vw;
     margin-left: auto;
     margin-right: auto;
     font-size: 2vw;
 }
     #IMADETHIS{
+        position: relative;
+        font-size: 2.3vw;
+        font-weight:900 ;
         background: linear-gradient(skyblue, lightpink, white, lightpink, skyblue);
         background-repeat: no-repeat;
         border-style: outset; 
         border-width: .25vw; 
         border-radius: 1vw;
         border-color: white; 
-        color: red;
+        color: black;
         text-decoration: none;
         text-align: center;
-        padding: 0px;
+        padding: 2vw;
         width: 60%;
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: .5vw;
-    }
-    #instructions{
-        position: relative;
-        background: linear-gradient(skyblue, lightpink, white, lightpink, skyblue);
-        background-repeat: no-repeat;
-        border-style: outset; 
-        border-width: .25vw; 
-        border-color: white; 
-        border-radius: 1vw;
-        color: red;
-        text-decoration: none;
-        padding: 0px;
-        width: 98%;
-        margin-left: auto;
-        margin-right: auto;
-        
-        top: -4.2vw;
-    }
-    #englishOrSpanish{
-        position: relative;
-        border-style: outset; 
-        border-color: rgb(255, 255, 255); 
-        background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
-        text-decoration: none;
-
-        border-width: .3vw; 
-        border-radius: 2vw; 
-        padding: 0vw;
-        width: 8vw;
-        height: 4vw;
-        top: -5.5vw;
-        left: 1vw;
-    
-        font-size: 2.5vw;
-        text-align: center;
-    
-        white-space: 0vw;
-    }
-    #englishOrSpanishImg{
-        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-        white-space: 0vw;
-        padding: .45vw;
-        width: 6.6vw
+        top: 8.1vw;
     }
       
 /*///////////////////////////////////////////////*/
@@ -281,6 +167,8 @@ a:hover{
     }
 /*////////////////////////////////////*/
 #Farm{
+    overflow-y: hidden; 
+    overflow-x: hidden;
     background-color: rgb(73, 122, 102);
     user-select: none;
     border-style:dashed; 
@@ -448,17 +336,101 @@ a:hover{
         padding: 0vw;
         width: 0vw;
         height: 0vw;
-        top: -17.75vw;
-        left: 74.5vw;    
+        top: -16.75vw;
+        left: 80.5vw;    
         white-space: 0vw;
         background-color: white;
     }
         #eraseFarmImg{
             white-space: 0vw;
-            width: 10vw;
+            width: 8vw;
             padding: .45vw;
         }
 
+    #helpDiv{
+        position: relative;
+        padding: 0vw;
+        width: 0vw;
+        height: 0vw;
+        top: -15.9vw;
+        left: 71.5vw;    
+        white-space: 0vw;
+        background-color: white;
+    }
+        #help{
+            border-color: #41587b; 
+            background: radial-gradient(#1f1f1f , #41587b);
+            text-align: center;
+            border-style:solid; 
+            border-width: .7vw;
+            border-radius: 5vw; 
+            width: 6.15vw;
+            height: 6.15vw;
+            padding: 0vw;
+            font-size: 2vw;
+        }
+            #helpImg{
+                position: relative;
+                left: .1vw;
+                white-space: 0vw;
+                width: 5vw;
+                padding: .45vw;
+            }
+        #helpBlurDiv{
+            position: relative;
+            top: -1000vw;
+            left: -1000vw;
+            height: 0vw;
+            width: 0vw;
+        }
+            #helpBlur{
+                position: relative;
+                background-color: #0000009b;
+                top: -0vw;
+                left: -0vw;
+                height: 1100vw;
+                width: 1040vw;
+            }
+        #helpCanvasDiv{
+            position: relative;
+            top: -10.2vw;
+            left: -73vw;
+            height: 0vw;
+            width: 0vw;
+        }
+            #helpCanvas{
+                position: relative;
+                top: 0vw;
+                left: 0vw;
+                width: 96vw;
+                height: 96vw;
+            }
+                .helpText{
+                    position: relative;
+                    color: #ffcccc;
+                    font-size: 2vw;
+                    height: 0vw;
+                }
+                .helpSubText{
+                    position: relative;
+                    color: #ffffff;
+                    font-size: 2vw;
+                    height: 0vw;
+                }
+                .helpTextRight{
+                    text-align: right;
+                    position: relative;
+                    color: #ffcccc;
+                    font-size: 2vw;
+                    height: 0vw;
+                }
+                .helpSubTextRight{
+                    text-align: right;
+                    position: relative;
+                    color: #ffffff;
+                    font-size: 2vw;
+                    height: 0vw;
+                }
     #compass{
         position: relative;
         width: 28vw;
@@ -1588,7 +1560,80 @@ a:hover{
     }
 /*/////////////////////////////////*/
     /* 
+#plotSelector{
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    position: fixed;
+    border-style: outset; 
+    border-width: .3vh; 
+    border-radius: 2vh; 
+    padding: .6vh;
+    width: 8vh;
+    height: 60.5vh;
+    border-color: rgb(124, 63, 149); 
+    background-color: rgb(145, 101, 178);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 
+    top: 17.5vh;
+    font-size: 0vh;
+    white-space: 0vh;
+}
+.plotSelectorImg{
+    white-space: 0vh;
+    padding: .2vh;
+    width: 6.3vh
+}
+#toolBarHider{
+    position: fixed;
+    border-style: outset; 
+    border-width: .3vh; 
+    border-radius: 2vh; 
+    padding: 0vh;
+    width: 6.07vh;
+    height: 3vh;
+    border-color: rgb(107, 9, 146); 
+    background-color: rgb(86, 5, 149);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+
+    top: 6.3vh;
+    font-size: 2.5vh;
+    text-align: center;
+
+    white-space: 0vh;
+}
+.toolBarHiderImg{
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    white-space: 0vh;
+    padding: .45vh;
+    width: 5vh
+}
+#toolBarFlipper{
+    position: fixed;
+    border-style: outset; 
+    border-width: .3vh; 
+    border-radius: 2vh; 
+    padding: 0vh;
+    width: 6.07vh;
+    height: 3vh;
+    border-color: rgb(107, 9, 146); 
+    background-color: rgb(86, 5, 149);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+
+    top: 80vh;
+    font-size: 2.5vh;
+    text-align: center;
+
+    white-space: 0vh;
+}
+.toolBarFlipperImg{
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    white-space: 0vh;
+    padding: .45vh;
+    width: 5vh
+}
 
  #resetFarmDiv{
         position: relative;
