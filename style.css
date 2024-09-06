@@ -330,6 +330,56 @@ a:hover{
                         padding-top: .5vw;
                         margin-right: .5vw;
                     }
+            #cloverEffectsDiv{
+                position: relative;
+                border-width: 0px; 
+                width: 0vw;
+                height: 0vw;
+                left: 49vw;
+                top: 10vw;
+                border-radius: .4vw; 
+            }
+                #cloverEffects{
+                    background-color: #000000;
+                    color: #2a3950;
+                    border-radius: .4vw; 
+                    border-width: 0px; 
+                    width: 19vw;
+                    height: 5vw;
+                    padding: 0.5vw;
+                    padding-left: 1vw;
+                    font-size: 2vw;
+                }
+                    #strangeRateLabel{
+                        position: relative;
+                        top: 2.5vw;
+                        height: 0vw;
+                        color: rgb(213, 210, 255);
+                        font-size: 1.8vw;
+                    }
+                    #timeRateLabel{
+                        position: relative;
+                        top: 0vw;
+                        height: 0vw;
+                        color: rgb(172, 230, 172);
+                        font-size: 1.8vw;
+                    }
+                    #strangeRateScore{
+                        position: relative;
+                        top: 2.5vw;
+                        left: 13vw;
+                        height: 0vw;
+                        color: rgb(164, 157, 255);
+                        font-size: 1.8vw;
+                    }
+                    #timeRateScore{
+                        position: relative;
+                        top: 0vw;
+                        left: 11.8vw;
+                        height: 0vw;
+                        color: rgb(74, 255, 74);
+                        font-size: 1.8vw;
+                    } 
 
     #eraseFarmDiv{
         position: relative;
@@ -408,12 +458,14 @@ a:hover{
                 .helpText{
                     position: relative;
                     color: #ffcccc;
+                    line-height: 2.3vw;
                     font-size: 2vw;
                     height: 0vw;
                 }
                 .helpSubText{
                     position: relative;
                     color: #ffffff;
+                    line-height: 2.3vw;
                     font-size: 2vw;
                     height: 0vw;
                 }
@@ -421,12 +473,14 @@ a:hover{
                     text-align: right;
                     position: relative;
                     color: #ffcccc;
+                    line-height: 2.3vw;
                     font-size: 2vw;
                     height: 0vw;
                 }
                 .helpSubTextRight{
                     text-align: right;
                     position: relative;
+                    line-height: 2.3vw;
                     color: #ffffff;
                     font-size: 2vw;
                     height: 0vw;
@@ -736,15 +790,14 @@ a:hover{
         padding: 0vw;
         width: 0vw;
         height: 0vw;
-        left: 62.5vw;
+        left: 63.75vw;
         top: 55.5vw;
         white-space: 0vw;
     }
         #sickleDisplay{
-            background-color: #ddd6bc;
             border-radius: .4vw; 
             border-width: 0px; 
-            width: 27vw;
+            width: 0vw;
             height: 3.5vw;
             padding: 0vw;
             font-size: 2vw;
@@ -816,9 +869,9 @@ a:hover{
             padding: 0vw;
             padding-top: .5vw;
             width: 6vw;
-            height: 35.5vw;
+            height: 41vw;
             left: -1vw;
-            top: -52.5vw;
+            top: -58vw;
             white-space: 0vw;
         }
 
@@ -1185,7 +1238,7 @@ a:hover{
         height: 0vw;
         white-space: 0vw;
         left: 74.04vw;
-        top: 22.5vw;
+        top: 24vw;
     }
         #titleDisplay{
             background-color: rgb(30, 30, 30);
@@ -1201,12 +1254,21 @@ a:hover{
             white-space: 0vw;
             line-height: 2.2vw;
         }
+            #profitTitle{
+                position: relative;
+                text-align: left;
+                top: 0vw;
+                height: 2.7vw;
+                color: rgb(255, 248, 192);
+                font-size: 1.8vw;
+            }
         #plusMinus{
             position: relative;
             padding: 0vw;
             width: 0vw;
             height: 0vw;
             white-space: 0vw;
+            top: 5vw;
         }
             .plusMinusText{
                 position: relative;
@@ -1220,7 +1282,7 @@ a:hover{
         #profitToggleDiv{
             position: relative;
             left: -3.7vw;
-            top: 0vw;
+            top: 5vw;
             padding: 0vw;
             width: 0vw;
             height: 0vw;
@@ -1244,6 +1306,29 @@ a:hover{
                 height: 2.4vw;
                 font-size: 0vw;
             }
+        #profitIconDiv{
+            position: relative;
+            left: 14.9vw;
+            top: -16.2vw;
+            padding: 0vw;
+            width: 0vw;
+            height: 0vw;
+            white-space: 0vw;
+        }
+            .profitIcon{
+                position: relative;
+                text-align: left;
+                border-radius: .4vw; 
+                top: 0vw;
+                height: 3.4vw;
+                color: rgb(255, 238, 0);
+                font-size: 2.4vw;
+            }
+            .profitIconImg{
+                position: relative;
+                height: 2vw;
+                font-size: 0vw;
+            }
         #profitDisplay{
             background-color: rgb(0, 0, 0);
             position: relative;
@@ -1253,7 +1338,7 @@ a:hover{
             top: -2vw;
             border-width: 0px; 
             width: 13.8vw;
-            height: 24vw;
+            height: 19vw;
             padding: .5vw;
             white-space: 0vw;
             line-height: 2.2vw;
@@ -1266,14 +1351,6 @@ a:hover{
                 height: 3.4vw;
                 color: rgb(255, 238, 0);
                 font-size: 2.4vw;
-            }
-            #profitTitle{
-                position: relative;
-                text-align: left;
-                top: 0vw;
-                height: 2.7vw;
-                color: rgb(255, 248, 192);
-                font-size: 1.8vw;
             }
             #baseProfit{
                 position: relative;
@@ -1308,69 +1385,104 @@ a:hover{
             #plusMinus3{
                 color: rgb(255, 255, 255);
             }
-            #playerStrangeRatelabel{
-                position: relative;
-                top: 0.5vw;
-                height: 0vw;
-                color: rgb(213, 210, 255);
-                font-size: 1.8vw;
-            }
-            #playerStrangerateScore{
-                position: relative;
-                top: 0.55vw;
-                left: 13vw;
-                height: 0vw;
-                color: rgb(164, 157, 255);
-                font-size: 1.8vw;
-            }
-            #playerCloverTimelabel{
-                position: relative;
-                top: 0.5vw;
-                height: 0vw;
-                color: rgb(172, 230, 172);
-                font-size: 1.8vw;
-            }
-            #playerCloverTimeScore{
-                position: relative;
-                top: 0.55vw;
-                left: 11.8vw;
-                height: 0vw;
-                color: rgb(74, 255, 74);
-                font-size: 1.8vw;
-            } 
-        #totalDisplay{
+        #totalDisplayDiv{
             position: relative;
-            user-select: none;
-            border-radius: .4vw; 
-            left: -4vw;
-            top: -1.7vw;
-            background-color: rgb(0, 0, 0);
-            border-width: 0px; 
-            width: 18.45vw;
-            height: 3vw;
-            padding: .5vw;
+            left: 0vw;
+            top: 0vw;
+            padding: 0vw;
+            width: 0vw;
+            height: 0vw;
             white-space: 0vw;
-            line-height: 2.2vw;
         }
-            #totalProfit{
+            #totalDisplay{
                 position: relative;
-                text-align: right;
-                top: .23vw;
-                width: 17.6vw;
-                height: 5.5vw;
-                color: #efb65b;
-                font-size: 3.5vw;
+                user-select: none;
+                border-radius: .4vw; 
+                left: -3.7vw;
+                top: -1.7vw;
+                background-color: rgb(0, 0, 0);
+                border-width: 0px; 
+                width: 18.2vw;
+                height: 3vw;
+                padding: .5vw;
+                white-space: 0vw;
+                line-height: 2.2vw;
             }
-            #totalEqual{
+                #totalProfit{
+                    position: relative;
+                    text-align: right;
+                    top: .4vw;
+                    width: 17.6vw;
+                    height: 5.5vw;
+                    color: #efb65b;
+                    font-size: 3.5vw;
+                }
+                #totalEqual{
+                    position: relative;
+                    text-align: left;
+                    top: -5.1vw;
+                    left: .5vw;
+                    width: 19vw;
+                    height: 5.5vw;
+                    color: #efb65b;
+                    font-size: 3.5vw;
+                }
+            #fullHarvestTitleDisplay{
+                background-color: rgb(255, 242, 145);
                 position: relative;
-                text-align: left;
-                top: -5.4vw;
-                left: .5vw;
-                width: 19vw;
-                height: 5.5vw;
-                color: #efb65b;
-                font-size: 3.5vw;
+                user-select: none;
+                border-radius: .4vw; 
+                left: .25vw;
+                top: -1vw;
+                border-width: 0px; 
+                width: 13.3vw;
+                height: 4vw;
+                padding: .5vw;
+                white-space: 0vw;
+                line-height: 2.2vw;
             }
+                #fullHarvestTitle{
+                    position: relative;
+                    text-align: center;
+                    top: 0vw;
+                    height: 2.7vw;
+                    width: 13.3vw;
+                    color: rgb(19, 19, 19);
+                    font-size: 2.2vw;
+                }
+            #fullHarvestDisplay{
+                position: relative;
+                user-select: none;
+                border-radius: .4vw; 
+                left: -3.7vw;
+                top: -3.0vw;
+                background-color: #efb65b;
+                border-width: 0px; 
+                width: 18.2vw;
+                height: 3vw;
+                padding: .5vw;
+                white-space: 0vw;
+                line-height: 2.2vw;
+            }
+                #fullHarvestProfit{
+                    position: relative;
+                    text-align: right;
+                    top: .5vw;
+                    width: 17.6vw;
+                    height: 5.5vw;
+                    color: #000000;
+                    font-size: 3.5vw;
+                }
+                #fullHarvestEqual{
+                    position: relative;
+                    text-align: left;
+                    top: -5vw;
+                    left: .5vw;
+                    width: 19vw;
+                    height: 5.5vw;
+                    color: #000000;
+                    font-size: 3.5vw;
+                }
 
     .plot{
         width: 2vw;
