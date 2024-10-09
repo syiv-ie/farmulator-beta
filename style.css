@@ -431,6 +431,7 @@ a:hover{
         }
         #moonSelectorDiv{
             background-color: #434f62;
+            line-height: 0vw;
             position: relative;
             border-radius: .4vw; 
             padding: 0vw;

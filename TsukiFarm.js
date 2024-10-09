@@ -2,13 +2,10 @@
 //disord @syiv 
 //top ten "id rather do it in js" codes
 
-const queryParams = new URLSearchParams(window.location.search);
-
-let currentWebsiteVersion = "2.1.0";
+let currentWebsiteVersion = "2.2";
 let startingFarm = "`/2.1.0/gg52/-ad2f-cobodof-eobbdof-gobodof-id0bd0dbf-kd1bodof/-bbfd2jbld2nd2pbrd2td2vlx-dqdqfd3hqjd2lqnqpd2rqtqvlx-fbbodofohd2jolonoporotovbx-he1bqdqfbhqjblqnqpbrqtqve3x-jodofohd1jolonoporotov-lbbqdqfd0hqjd1lqnqpbrqtqvbx-ne1bodofbhd1jblonoporotove3x-pqdqfd2hqjd1lqnqpbrqtqv-rbbodofohd1jolonoporotovbx-te1bqdqfbhqjblqnqpd0rqtqvd3x-vodofohd1jolonopbre3t-xbbqdqfbhqjblqnqpd3r/-bd2bd2d-dobod-fobbd-hobod///-bobodofoh-dobbdbfoh-fobodofoh-hd0bd0dd0fd0h/`"
 startingFarm = "";
 startingFarm = window.location.search
-//console.log(window.location.search);
 
 let tutorialFarm = "`/2.1.0/ag10//-bqlmnbpd3r-dqlfn-hll-jlj/////`"
 let pausedFarm = ""
@@ -22,6 +19,7 @@ let orbs = 0;
 let chosenHoe = 0;
 let chosenSickle = 0;
 let chosenMoon = 0;
+let chosenMoonYield = 0;
 let sickleYield = chosenSickle;
 
 let revealWateredSelected = false;
@@ -1086,12 +1084,13 @@ function buildFarm(){
                 c.src = "images/farmPlots/moon" + i + ".png";
                 c.style.position = "relative";
                 c.onclick = function(){
+                    chosenMoon = i;
                     if(i <= 3){
-                        chosenMoon = i;
+                        chosenMoonYield = i;
                     }else if(i == 4){
-                        chosenMoon = 5;
+                        chosenMoonYield = 5;
                     }else{
-                        chosenMoon = 8 - i;
+                        chosenMoonYield = 8 - i;
                     }
                     moonSelectorDiv.style.display = "none";
                     moonBox.innerHTML = "<img class=\"moonSelectorImg\" src=\"images/farmPlots/moon" + i + ".png\">";
@@ -2028,8 +2027,8 @@ function calculateBoard(){
                     }
 
                     if((plotList[groups[l].plots[i][j]].namae).localeCompare('Gloamroot') == 0){
-                        minProfit = plotList[groups[l].plots[i][j]].minYield + chosenMoon;
-                        maxProfit = plotList[groups[l].plots[i][j]].minYield + chosenMoon;
+                        minProfit = plotList[groups[l].plots[i][j]].minYield + chosenMoonYield;
+                        maxProfit = plotList[groups[l].plots[i][j]].minYield + chosenMoonYield;
                     }
 
                     if(groups[l].uv[i][j] > 0){
@@ -2241,7 +2240,12 @@ function calculateBoard(){
 /////////////////////////////////////////////////////////////////////////////////////
 function printFarmstructure(){
     let rowPopulated = false;
-    let farmStructure = "/" + currentWebsiteVersion + "/" + String.fromCharCode("a".charCodeAt(0) + chosenHoe) + String.fromCharCode("a".charCodeAt(0) + chosenSickle) + orbs + "/" 
+    let farmStructure = "/" + currentWebsiteVersion + "/" + 
+    String.fromCharCode("a".charCodeAt(0) + chosenHoe) + 
+    String.fromCharCode("a".charCodeAt(0) + chosenSickle) + 
+    String.fromCharCode("a".charCodeAt(0) + chosenMoon) + 
+    orbs + 
+    "/" 
     for(let l=0; l<6; l++){
         for(let i=0; i<groups[l].height; i++){
             for(let j=0; j<groups[l].width; j++){
@@ -2284,6 +2288,8 @@ function readFarmstructure(farmCode0){//haha i hate error handling haha
         read1(farmImport);
     }else if((farmImport[1]).localeCompare("2.1.0") == 0){
         read2(farmImport);
+    }else if((farmImport[1]).localeCompare("2.2") == 0){
+        read3(farmImport);
     }else{
         return;
     }
@@ -2365,6 +2371,54 @@ function read2(farmImport){
 
     document.getElementById("hoeTool").innerHTML = "<img class=\"hoeToolImg\" src=\"images/farmPlots/Hoe" + chosenHoe + ".png\">";
     document.getElementById("sickleImgDiv").innerHTML = "<img id=\"sickleImg\" src=\"images/farmPlots/Sickle" + chosenSickle + ".png\">";
+
+    for(let l=0; l<6; l++){
+        let g = farmImport[l+3];
+
+        if(g.localeCompare("") != 0){
+            const plotImport = g.split("-");
+
+            for(let k=1; k<plotImport.length; k++){//start at 1 because split will count before the first - as well
+                const plotData = plotImport[k].split("");
+                let x = 1;
+                let i = (plotData[0]).charCodeAt(0) - 97;
+
+                do{
+                    if((plotList[(plotData[x]).charCodeAt(0) - 97]).isDirectional){
+                        groups[l].updatePlot(
+                            ((plotData[x]).charCodeAt(0) - 97), 
+                            parseInt(plotData[x+1]), 
+                            i, 
+                            ((plotData[x+2]).charCodeAt(0) - 97), 
+                            String.fromCharCode("A".charCodeAt(0) + l));
+                        x += 3;
+                    }else{
+                        groups[l].updatePlot(
+                            ((plotData[x]).charCodeAt(0) - 97), 0, 
+                            i, 
+                            ((plotData[x+1]).charCodeAt(0) - 97),
+                            String.fromCharCode("A".charCodeAt(0) + l));
+                        x += 2;
+                    }
+                }while(x<plotData.length);
+            }
+        }
+    }
+}
+function read3(farmImport){
+    for(let l=0; l<6; l++){
+        groups[l].clearfarm(String.fromCharCode("A".charCodeAt(0) + l));
+    }
+
+    const tools = farmImport[2].split("");
+    chosenHoe = ((tools[0]).charCodeAt(0) - 97)
+    chosenSickle = ((tools[1]).charCodeAt(0) - 97)
+    chosenMoon = ((tools[2]).charCodeAt(0) - 97)
+    document.getElementById("moonBox").innerHTML = "<img class=\"moonSelectorImg\" src=\"images/farmPlots/moon" + chosenMoon + ".png\">";
+    document.getElementById("hoeTool").innerHTML = "<img class=\"hoeToolImg\" src=\"images/farmPlots/Hoe" + chosenHoe + ".png\">";
+    document.getElementById("sickleImgDiv").innerHTML = "<img id=\"sickleImg\" src=\"images/farmPlots/Sickle" + chosenSickle + ".png\">";
+
+    orbs = parseInt(farmImport[2].slice(3, farmImport[2].length))
 
     for(let l=0; l<6; l++){
         let g = farmImport[l+3];
