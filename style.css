@@ -424,6 +424,7 @@ a:hover{
         .moonSelectorImg{
             position: relative;
             padding: 0vw;
+            padding-bottom: .5vw;
             height: 4vw;
             left: 0vw;
             top: 0vw;
@@ -437,9 +438,9 @@ a:hover{
             padding: 0vw;
             padding-top: .5vw;
             width: 4vw;
-            height: 43vw;
+            height: 41vw;
             left: 0vw;
-            top: -23.55vw;
+            top: -22.55vw;
             white-space: 0vw;
         }
 

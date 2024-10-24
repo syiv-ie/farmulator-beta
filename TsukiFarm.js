@@ -1082,7 +1082,6 @@ function buildFarm(){
                 c.className = "moonSelectorImg";
                 c.id = "moonSelector" + i;
                 c.src = "images/farmPlots/moon" + i + ".png";
-                c.style.position = "relative";
                 c.onclick = function(){
                     chosenMoon = i;
                     if(i <= 3){
@@ -1526,9 +1525,9 @@ function buildFarm(){
                             let hourlyProfitHelp4 = document.createElement("div");
                             hourlyProfitHelp4.className = "helpSubTextRight";
                             hourlyProfitHelp4.id = "breedCountHelp";
-                            hourlyProfitHelp4.innerHTML = "Tap the checkboxes to remove/add a value to the calculation"
+                            hourlyProfitHelp4.innerHTML = "Tap the checkboxes to remove/add a value to the calculation\nAlso! you can choose the moon phase"
                             hourlyProfitHelp4.style.left = "-25vw"
-                            hourlyProfitHelp4.style.top = "36.2vw"
+                            hourlyProfitHelp4.style.top = "35.2vw"
                             hourlyProfitHelp4.style.width = "37.5vw"
                             helpOverlayDiv.appendChild(hourlyProfitHelp4);
                             let hourlyProfitHelp5 = document.createElement("div");
@@ -1536,7 +1535,7 @@ function buildFarm(){
                             hourlyProfitHelp5.id = "breedCountHelp";
                             hourlyProfitHelp5.innerHTML = "The first Sum is for [HOURLY] and the second is for a [FULL HARVEST]"
                             hourlyProfitHelp5.style.left = "-25vw"
-                            hourlyProfitHelp5.style.top = "41.1vw"
+                            hourlyProfitHelp5.style.top = "42.1vw"
                             hourlyProfitHelp5.style.width = "37.5vw"
                             helpOverlayDiv.appendChild(hourlyProfitHelp5);
 
